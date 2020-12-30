@@ -4,9 +4,14 @@ $().ready(function() {
             nome: {
                 required: true
             },
-            email: {
-                required: true,
-                email: true
+            preco: {
+                required: true
+            },
+            quantidade: {
+                required: true
+            },
+            descricao: {
+                required: true
             }
         },
         highlight: function(element) {
@@ -28,10 +33,19 @@ $().ready(function() {
             nome: {
                 required: "Este campo não pode ser vazio"
             },
-            email: {
+            preco: {
                 required: "Este campo não pode ser vazio",
-                email: "Email com formato inválido"
+            },
+            quantidade: {
+                required: "Este campo não pode ser vazio",
+            },
+            descricao: {
+                required: "Este campo não pode ser vazio",
             }
         }
+    });
+
+    jQuery.extend(jQuery.validator.messages, {
+        number: "Entre com um número válido.",
     });
 });

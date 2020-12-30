@@ -12,12 +12,13 @@ abstract class Controller
     public function __construct($app)
     {
         $this->setViewParam('nameController',$app->getControllerName());
+        $this->setViewParam('nameAction',$app->getAction());
     }
 
     public function render($view)
     {
-        $viewVar = $this->getViewVar();
-        $Sessao  = Sessao::class;
+        $viewVar   = $this->getViewVar();
+        $Sessao    = Sessao::class;
 
         require_once PATH . '/App/Views/layouts/header.php';
         require_once PATH . '/App/Views/layouts/menu.php';

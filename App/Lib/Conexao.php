@@ -18,11 +18,11 @@ class Conexao
         $pdoConfig .= "dbname=".DB_NAME.";";
 
         try { 
-            if(!isset($connection)){
-                $connection =  new PDO($pdoConfig, DB_USER, DB_PASSWORD);
-                $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            if(!isset(self::$connection)){
+                self::$connection =  new PDO($pdoConfig, DB_USER, DB_PASSWORD);
+                self::$connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             }
-            return $connection;
+            return self::$connection;
         } catch (PDOException $e) {
             throw new Exception("Erro de conexão com o banco de dados",500);
         }

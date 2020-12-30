@@ -18,9 +18,9 @@ class App
         /*
          * Constantes do sistema
          */
-        define('APP_HOST'       , $_SERVER['HTTP_HOST'] . "/mvc-php-basico-1");
+        define('APP_HOST'       , $_SERVER['HTTP_HOST'] . "/mvc-php-crud-produto");
         define('PATH'           , realpath('./'));
-        define('TITLE'          , "Primeira aplicação MVC em PHP - DevMedia");
+        define('TITLE'          , "T- Questão - Um site de questão para vencedores");
         define('DB_HOST'        , "localhost");
         define('DB_USER'        , "root");
         define('DB_PASSWORD'    , "");
@@ -104,11 +104,6 @@ class App
     public function getControllerName()
     {
         return $this->controllerName;
-    }
-
-    public function getParams()
-    {
-        return $this->params;
     }
 
     private function verificaArray ( $array, $key ) {
