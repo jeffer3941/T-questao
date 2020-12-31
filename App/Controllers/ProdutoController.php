@@ -22,7 +22,7 @@ class ProdutoController extends Controller
 
     public function cadastro()
     {
-        $this->render('/questao/cadastro');
+        $this->render('/produto/cadastro');
 
         Sessao::limpaFormulario();
         Sessao::limpaMensagem();
@@ -47,7 +47,7 @@ class ProdutoController extends Controller
 
         if($resultadoValidacao->getErros()){
             Sessao::gravaErro($resultadoValidacao->getErros());
-            $this->redirect('/questao/cadastro');
+            $this->redirect('/produto/cadastro');
         }
 
         $questaoDAO = new QuestaoDAO();
@@ -58,7 +58,7 @@ class ProdutoController extends Controller
         Sessao::limpaMensagem();
         Sessao::limpaErro();
 
-        $this->redirect('/questao');
+        $this->redirect('/produto');
       
     }
     
@@ -72,12 +72,12 @@ class ProdutoController extends Controller
 
         if(!$questao){
             Sessao::gravaMensagem("questão inexistente");
-            $this->redirect('/questao');
+            $this->redirect('/produto');
         }
 
         self::setViewParam('questao',$questao);
 
-        $this->render('/questao/editar');
+        $this->render('/produto/editar');
 
         Sessao::limpaMensagem();
 
@@ -113,7 +113,7 @@ class ProdutoController extends Controller
         Sessao::limpaMensagem();
         Sessao::limpaErro();
 
-        $this->redirect('/questao');
+        $this->redirect('/produto');
 
     }
     
@@ -132,7 +132,7 @@ class ProdutoController extends Controller
 
         self::setViewParam('questao',$questao);
 
-        $this->render('/questao/exclusao');
+        $this->render('/produto/exclusao');
 
         Sessao::limpaMensagem();
 
@@ -147,12 +147,12 @@ class ProdutoController extends Controller
 
         if(!$questaoDAO->excluir($Questao)){
             Sessao::gravaMensagem("Questão inexistente");
-            $this->redirect('/questao');
+            $this->redirect('/produto');
         }
 
         Sessao::gravaMensagem("Questão excluida com sucesso!");
 
-        $this->redirect('/questao');
+        $this->redirect('/produto');
 
     }
 }

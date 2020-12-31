@@ -15,11 +15,11 @@
             <?php } ?>
 
             <form action="http://<?php echo APP_HOST; ?>/produto/excluir" method="post" id="form_cadastro">
-                <input type="hidden" class="form-control" name="id" id="id" value="<?php echo $viewVar['produto']->getId(); ?>">
+                <input type="hidden" class="form-control" name="id" id="id" value="<?php echo $viewVar['questao']->getIdQuestao(); ?>">
 
                 <div class="panel panel-danger">
                     <div class="panel-body">
-                        Deseja realmente excluir o produto: <?php echo $viewVar['produto']->getNome(); ?> ?
+                        Deseja realmente excluir o produto: <?php echo $viewVar['questao']->getCabecarioQuestao(); ?> ?
                     </div>
                     <div class="panel-footer"> 
                         <button type="submit" class="btn btn-danger btn-sm">Excluir</button>

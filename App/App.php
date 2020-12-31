@@ -18,7 +18,7 @@ class App
         /*
          * Constantes do sistema
          */
-        define('APP_HOST'       , $_SERVER['HTTP_HOST'] . "/mvc-php-crud-produto");
+        define('APP_HOST'       , $_SERVER['HTTP_HOST'] . "/T-questao");
         define('PATH'           , realpath('./'));
         define('TITLE'          , "T- Questão - Um site de questão para vencedores");
         define('DB_HOST'        , "localhost");

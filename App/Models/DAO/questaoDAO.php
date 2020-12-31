@@ -13,7 +13,7 @@ class QuestaoDAO extends BaseDAO
                 "SELECT * FROM questao WHERE id_questao = $id"
             );
 
-            return $resultado->fetchObject(Questao::class);
+            return var_dump($resultado->fetchObject(Questao::class));
         }else{
             $resultado = $this->select(
                 'SELECT * FROM questao'
