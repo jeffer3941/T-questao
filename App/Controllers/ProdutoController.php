@@ -3,17 +3,17 @@
 namespace App\Controllers;
 
 use App\Lib\Sessao;
-use App\Models\DAO\ProdutoDAO;
-use App\Models\Entidades\Produto;
-use App\Models\Validacao\ProdutoValidador;
+use App\Models\DAO\QuestaoDAO;
+use App\Models\Entidades\Questao;
+use App\Models\Validacao\QuestaoValidador;
 
 class ProdutoController extends Controller
 {
     public function index()
     {
-        $produtoDAO = new ProdutoDAO();
+        $questaoDAO = new QuestaoDAO();
 
-        self::setViewParam('listaProdutos',$produtoDAO->listar());
+        self::setViewParam('listaProdutos',$questaoDAO->listar());
 
         $this->render('/produto/index');
 
@@ -22,7 +22,7 @@ class ProdutoController extends Controller
 
     public function cadastro()
     {
-        $this->render('/produto/cadastro');
+        $this->render('/questao/cadastro');
 
         Sessao::limpaFormulario();
         Sessao::limpaMensagem();
@@ -31,31 +31,34 @@ class ProdutoController extends Controller
 
     public function salvar()
     {
-        $Produto = new Produto();
-        $Produto->setNome($_POST['nome']);
-        $Produto->setPreco($_POST['preco']);
-        $Produto->setQuantidade($_POST['quantidade']);
-        $Produto->setDescricao($_POST['descricao']);
+        $Questao = new Questao();
+        $Questao->setTipoQuestao($_POST['cabecarioQuestao']);
+        $Questao->setCabecarioQuestao($_POST['tipoQuestao']);
+        $Questao->setAlternativa1($_POST['alternativa1']);
+        $Questao->setAlternativa2($_POST['alternativa2']);
+        $Questao->setAlternativa3($_POST['alternativa3']);
+        $Questao->setAlternativa4($_POST['alternativa4']);
+        $Questao->setRespostaQuestao($_POST['respostaQuestao']);
 
         Sessao::gravaFormulario($_POST);
 
-        $produtoValidador = new ProdutoValidador();
-        $resultadoValidacao = $produtoValidador->validar($Produto);
+        $questaoValidador = new QuestaoValidador();
+        $resultadoValidacao = $questaoValidador->validar($Questao);
 
         if($resultadoValidacao->getErros()){
             Sessao::gravaErro($resultadoValidacao->getErros());
-            $this->redirect('/produto/cadastro');
+            $this->redirect('/questao/cadastro');
         }
 
-        $produtoDAO = new ProdutoDAO();
+        $questaoDAO = new QuestaoDAO();
 
-        $produtoDAO->salvar($Produto);
+        $questaoDAO->salvar($Questao);
         
         Sessao::limpaFormulario();
         Sessao::limpaMensagem();
         Sessao::limpaErro();
 
-        $this->redirect('/produto');
+        $this->redirect('/questao');
       
     }
     
@@ -63,18 +66,18 @@ class ProdutoController extends Controller
     {
         $id = $params[0];
 
-        $produtoDAO = new ProdutoDAO();
+        $questaoDAO = new QuestaoDAO();
 
-        $produto = $produtoDAO->listar($id);
+        $questao = $questaoDAO->listar($id);
 
-        if(!$produto){
-            Sessao::gravaMensagem("Produto inexistente");
-            $this->redirect('/produto');
+        if(!$questao){
+            Sessao::gravaMensagem("questão inexistente");
+            $this->redirect('/questao');
         }
 
-        self::setViewParam('produto',$produto);
+        self::setViewParam('questao',$questao);
 
-        $this->render('/produto/editar');
+        $this->render('/questao/editar');
 
         Sessao::limpaMensagem();
 
@@ -83,32 +86,34 @@ class ProdutoController extends Controller
     public function atualizar()
     {
 
-        $Produto = new Produto();
-        $Produto->setId($_POST['id']);
-        $Produto->setNome($_POST['nome']);
-        $Produto->setPreco($_POST['preco']);
-        $Produto->setQuantidade($_POST['quantidade']);
-        $Produto->setDescricao($_POST['descricao']);
+        $Questao = new Questao();
+        $Questao->setTipoQuestao($_POST['cabecarioQuestao']);
+        $Questao->setCabecarioQuestao($_POST['tipoQuestao']);
+        $Questao->setAlternativa1($_POST['alternativa1']);
+        $Questao->setAlternativa2($_POST['alternativa2']);
+        $Questao->setAlternativa3($_POST['alternativa3']);
+        $Questao->setAlternativa4($_POST['alternativa4']);
+        $Questao->setRespostaQuestao($_POST['respostaQuestao']);
 
         Sessao::gravaFormulario($_POST);
 
-        $produtoValidador = new ProdutoValidador();
-        $resultadoValidacao = $produtoValidador->validar($Produto);
+        $questaoValidador = new QuestaoValidador();
+        $resultadoValidacao = $questaoValidador->validar($Questao);
 
         if($resultadoValidacao->getErros()){
             Sessao::gravaErro($resultadoValidacao->getErros());
             $this->redirect('/produto/edicao/'.$_POST['id']);
         }
 
-        $produtoDAO = new ProdutoDAO();
+        $questaoDAO = new QuestaoDAO();
 
-        $produtoDAO->atualizar($Produto);
+        $questaoDAO->atualizar($Questao);
 
         Sessao::limpaFormulario();
         Sessao::limpaMensagem();
         Sessao::limpaErro();
 
-        $this->redirect('/produto');
+        $this->redirect('/questao');
 
     }
     
@@ -116,18 +121,18 @@ class ProdutoController extends Controller
     {
         $id = $params[0];
 
-        $produtoDAO = new ProdutoDAO();
+        $questaoDAO = new QuestaoDAO();
 
-        $produto = $produtoDAO->listar($id);
+        $questao = $questaoDAO->listar($id);
 
-        if(!$produto){
+        if(!$questao){
             Sessao::gravaMensagem("Produto inexistente");
             $this->redirect('/produto');
         }
 
-        self::setViewParam('produto',$produto);
+        self::setViewParam('questao',$questao);
 
-        $this->render('/produto/exclusao');
+        $this->render('/questao/exclusao');
 
         Sessao::limpaMensagem();
 
@@ -135,19 +140,19 @@ class ProdutoController extends Controller
 
     public function excluir()
     {
-        $Produto = new Produto();
-        $Produto->setId($_POST['id']);
+        $Questao = new Questao();
+        $Questao->setIdQuestao($_POST['id']);
 
-        $produtoDAO = new ProdutoDAO();
+        $questaoDAO = new QuestaoDAO();
 
-        if(!$produtoDAO->excluir($Produto)){
-            Sessao::gravaMensagem("Produto inexistente");
-            $this->redirect('/produto');
+        if(!$questaoDAO->excluir($Questao)){
+            Sessao::gravaMensagem("Questão inexistente");
+            $this->redirect('/questao');
         }
 
-        Sessao::gravaMensagem("Produto excluido com sucesso!");
+        Sessao::gravaMensagem("Questão excluida com sucesso!");
 
-        $this->redirect('/produto');
+        $this->redirect('/questao');
 
     }
 }

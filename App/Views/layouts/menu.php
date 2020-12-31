@@ -15,10 +15,10 @@
                     <a href="http://<?php echo APP_HOST; ?>" >Home</a>
                 </li>
                 <li <?php if($viewVar['nameController'] == "ProdutoController" && ($viewVar['nameAction'] == "" || $viewVar['nameAction'] == "index")) { ?> class="active" <?php } ?>>
-                    <a href="http://<?php echo APP_HOST; ?>/produto" >Lista de Questão</a>
+                    <a href="http://<?php echo APP_HOST; ?>/questao" >Lista de Questão</a>
                 </li>
                 <li <?php if($viewVar['nameController'] == "ProdutoController" && $viewVar['nameAction'] == "cadastro") { ?> class="active" <?php } ?>>
-                    <a href="http://<?php echo APP_HOST; ?>/produto/cadastro" >Cadastro de Questão</a>
+                    <a href="http://<?php echo APP_HOST; ?>/questao/cadastro" >Cadastro de Questão</a>
                 </li>
             </ul>
         </div>

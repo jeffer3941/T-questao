@@ -13,7 +13,7 @@
                 </div>
             <?php } ?>
 
-            <form action="http://<?php echo APP_HOST; ?>/produto/salvar" method="post" id="form_cadastro">
+            <form action="http://<?php echo APP_HOST; ?>/questao/salvar" method="post" id="form_cadastro">
                 <div class="form-group">
                     <label for="cabecarioQuestao">Cabecalho da questão</label>
                     <input type="text" class="form-control"  name="cabecarioQuestao" placeholder="Cabecalho da questão" value="<?php echo $Sessao::retornaValorFormulario('cabecarioQuestao'); ?>" required>
